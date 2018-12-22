@@ -3,4 +3,9 @@
     <string name="dfh">Введите время</string>
     <string name="SF">Выбрать места</string>
     <string name="DG">Построить маршрут</string>
+    <string name="twodots">:</string>
+    <string name="btn_fav_route">Любимые маршруты</string>
+    <string name="btn_new_route">Новый маршрут</string>
+
+
 </resources>

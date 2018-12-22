@@ -15,7 +15,6 @@
         android:layout_marginBottom="239dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/minute_picker"
         app:layout_constraintStart_toStartOf="parent" />
 
     <NumberPicker
@@ -84,6 +83,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginBottom="144dp"
+        android:text="@string/twodots"
+        android:textColor="@color/colorBlack"
+        android:textSize="24sp"
+        app:fontFamily="serif"
+        app:layout_constraintBottom_toTopOf="@+id/btnChoose"
+        app:layout_constraintEnd_toStartOf="@+id/minute_picker"
+        app:layout_constraintStart_toEndOf="@+id/hour_picker"
+        app:layout_constraintTop_toBottomOf="@+id/time_view" />
 
 
 </android.support.constraint.ConstraintLayout>

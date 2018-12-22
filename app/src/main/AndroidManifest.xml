@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewRouteActivity">
+        <activity android:name=".ChooseOptionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,13 @@
         <activity android:name=".PlacesListActivity">
             <intent-filter>
                 <action android:name=".PlacesListActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NewRouteActivity">
+            <intent-filter>
+                <action android:name=".NewRouteActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
