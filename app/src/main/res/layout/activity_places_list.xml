@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".PlacesListActivity">
 
     <Button
         android:layout_width="wrap_content"
@@ -16,12 +16,12 @@
         android:text="Send Data To Next Activity"/>
 
     <ExpandableListView
-        android:id="@+id/lvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:childDivider="@color/colorBlack"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
+    android:id="@+id/lvCategory"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:childDivider="@color/colorBlack"
+    android:divider="@null"
+    android:dividerHeight="0dp" />
 
 
 </LinearLayout>

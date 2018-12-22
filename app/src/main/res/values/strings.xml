@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ExpendableCheckList</string>
+    <string name="dfh">Введите время</string>
+    <string name="SF">Выбрать места</string>
+    <string name="DG">Построить маршрут</string>
 </resources>

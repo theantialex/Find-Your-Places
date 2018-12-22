@@ -12,7 +12,7 @@ import com.example.alexandra.expendablechecklist.Model.SubCategoryItem;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class PlacesListActivity extends AppCompatActivity {
 
     private Button btn;
     private ExpandableListView lvCategory;
@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_places_list);
 
         btn = findViewById(R.id.btn);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CheckedActivity.class);
+                Intent intent = new Intent(PlacesListActivity.this, CheckedActivity.class);
                 startActivity(intent);
             }
         });
@@ -99,13 +99,17 @@ public class MainActivity extends AppCompatActivity {
         dataItem.setCategoryId("3");
         dataItem.setCategoryName("Еда");
         arSubCategory = new ArrayList<>();
+        ArrayList<String> FoodTypes = new ArrayList<>();
+        FoodTypes.add("Ресторан");
+        FoodTypes.add("Кафе");
+        FoodTypes.add("Бар");
 
-        for (int k = 1; k < 6; k++) {
+        for (int k = 0; k < FoodTypes.size(); k++) {
 
             SubCategoryItem subCategoryItem = new SubCategoryItem();
             subCategoryItem.setCategoryId(String.valueOf(ActTypes));
             subCategoryItem.setIsChecked(ConstantManager.CHECK_BOX_CHECKED_FALSE);
-            subCategoryItem.setSubCategoryName("Cooking: " + k);
+            subCategoryItem.setSubCategoryName(FoodTypes.get(k));
             arSubCategory.add(subCategoryItem);
         }
 
