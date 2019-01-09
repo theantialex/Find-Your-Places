@@ -10,9 +10,9 @@
         android:id="@+id/hour_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginLeft="124dp"
-        android:layout_marginBottom="239dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginBottom="256dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -21,10 +21,10 @@
         android:id="@+id/minute_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginRight="124dp"
-        android:layout_marginBottom="239dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="256dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="14dp"
         android:gravity="center"
         android:text="@string/dfh"
         android:textColor="@android:color/black"
@@ -45,8 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
 
@@ -55,39 +54,40 @@
         android:layout_height="142dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="46dp"
-        android:background="@drawable/roundbutton"
+        android:background="@drawable/choose_place_button"
         android:gravity="center"
         android:text="@string/SF"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         android:textStyle="bold"
         app:fontFamily="serif"
-        app:layout_constraintBottom_toTopOf="@+id/btnMake"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hour_picker"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintTop_toBottomOf="@+id/hour_picker" />
 
     <Button
         android:id="@+id/btnMake"
-        android:layout_width="358dp"
-        android:layout_height="wrap_content"
+        android:layout_width="262dp"
+        android:layout_height="60dp"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="18dp"
         android:layout_marginRight="18dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="28dp"
+        android:background="#FF883C"
         android:gravity="center"
         android:text="@string/DG"
         android:textStyle="bold"
         app:fontFamily="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChoose"
+        app:layout_constraintVertical_bias="0.75" />
 
     <TextView
         android:id="@+id/textView"
