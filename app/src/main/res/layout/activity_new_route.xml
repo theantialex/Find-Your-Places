@@ -49,23 +49,28 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
+
         android:id="@+id/btnChoose"
-        android:layout_width="352dp"
-        android:layout_height="62dp"
+        android:layout_width="154dp"
+        android:layout_height="142dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="46dp"
+        android:background="@drawable/roundbutton"
         android:gravity="center"
         android:text="@string/SF"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:fontFamily="serif"
         app:layout_constraintBottom_toTopOf="@+id/btnMake"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hour_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/hour_picker"
+        app:layout_constraintVertical_bias="0.65" />
 
     <Button
         android:id="@+id/btnMake"

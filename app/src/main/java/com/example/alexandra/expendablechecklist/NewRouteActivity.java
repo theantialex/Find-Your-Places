@@ -11,7 +11,7 @@ public class NewRouteActivity extends AppCompatActivity {
 
     NumberPicker thouPicker = null;
     NumberPicker tminPicker = null;
-    private Button act_new;
+    private Button act_choose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +33,12 @@ public class NewRouteActivity extends AppCompatActivity {
     }
     public void addListenerOnButton() {
 
-        act_new = (Button) findViewById(R.id.btnChoose);
+        act_choose = (Button) findViewById(R.id.btnChoose);
 
-        act_new.setOnClickListener(
+        act_choose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Opens second activity
                         Intent intent = new Intent(".PlacesListActivity");
                         startActivity(intent);
 
