@@ -105,6 +105,7 @@ public class PlacesListActivity extends AppCompatActivity {
         FoodTypes.add("Ресторан");
         FoodTypes.add("Кафе");
         FoodTypes.add("Бар");
+        FoodTypes.add("Продуктовый магазин");
 
         for (int k = 0; k < FoodTypes.size(); k++) {
 

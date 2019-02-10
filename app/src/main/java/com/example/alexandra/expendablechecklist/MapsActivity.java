@@ -132,6 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         food.add("restaurant");
         food.add("cafe");
         food.add("bar");
+        food.add("grocery_or_supermarket");
 
         if (parent == 0) {
             return Active.get(child);
