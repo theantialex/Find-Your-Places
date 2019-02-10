@@ -12,6 +12,7 @@ public class NewRouteActivity extends AppCompatActivity {
     NumberPicker thouPicker = null;
     NumberPicker tminPicker = null;
     private Button act_choose;
+    public String radius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,13 @@ public class NewRouteActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int a = thouPicker.getValue();
+                        a *= 3600;
+                        int b =  tminPicker.getValue();
+                        int c = ((a+b)/951)*500;
+                        radius = String.valueOf(c);
                         Intent intent = new Intent(".PlacesListActivity");
+                        intent.putExtra("rad", radius);
                         startActivity(intent);
 
 

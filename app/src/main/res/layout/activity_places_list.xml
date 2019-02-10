@@ -8,12 +8,18 @@
     tools:context=".PlacesListActivity">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/btn"
-        android:layout_marginBottom="20dp"
+        android:layout_width="262dp"
+        android:layout_height="60dp"
         android:layout_marginTop="10dp"
-        android:text="Send Data To Next Activity"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="18dp"
+        android:background="#FF883C"
+        android:gravity="center"
+        android:text="@string/DG"
+        android:textStyle="bold"
+        app:fontFamily="serif" />
 
     <ExpandableListView
     android:id="@+id/lvCategory"

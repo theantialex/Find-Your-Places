@@ -31,11 +31,13 @@ public class PlacesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_places_list);
 
         btn = findViewById(R.id.btn);
+        final String radius = getIntent().getStringExtra("rad");
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PlacesListActivity.this, CheckedActivity.class);
+                Intent intent = new Intent(PlacesListActivity.this, MapsActivity.class);
+                intent.putExtra("radius", radius);
                 startActivity(intent);
             }
         });

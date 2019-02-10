@@ -31,6 +31,7 @@ public class CheckedActivity extends AppCompatActivity {
 
                 if (isChildChecked.equalsIgnoreCase(ConstantManager.CHECK_BOX_CHECKED_TRUE))
                 {
+                    // FIND OUT WHAT WAS CHOSEN HERE
                     tvChild.setText(tvChild.getText() +" , " + MyCategoriesExpandableListAdapter.parentItems.get(i).get(ConstantManager.Parameter.CATEGORY_NAME) + " "+(j+1));
                 }
 

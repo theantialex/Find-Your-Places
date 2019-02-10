@@ -6,6 +6,7 @@
     <string name="twodots">:</string>
     <string name="btn_fav_route">Любимые маршруты</string>
     <string name="btn_new_route">Новый маршрут</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>
