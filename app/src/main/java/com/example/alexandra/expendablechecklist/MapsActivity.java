@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -176,7 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
-    public void main(final List<String> TYP, final int radius){
+    public void main(final List<String> TYP, final int radius) {
         num_of_places = 0;
         final Polyline[] line = new Polyline[1];
 
@@ -189,7 +190,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         final RetrofitMaps service = retrofit.create(RetrofitMaps.class);
 
-        Call<Example> call = service.getNearbyPlaces( origin_latitude + "," + origin_longitude, radius);
+        Call<Example> call = service.getNearbyPlaces(origin_latitude + "," + origin_longitude, radius);
 
         call.enqueue(new Callback<Example>() {
             @Override
@@ -285,12 +286,154 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     }
                                     String waypoints = waypoints12 + waypoints2;
 
-                                    waypoints = waypoints.substring(0, waypoints.length() - 1);
+                                   // waypoints = waypoints.substring(0, waypoints.length() - 1);
 
-                                    // MAKE ROUTE HERE
-                                    // optimize:true перед waypoints
+                                    TimeUnit.SECONDS.sleep(4);
+                                    try {
+                                        String page = response3.body().getNextPageToken();
+                                        String url = "https://maps.googleapis.com/maps/";
+                                        final String waypoints24 = waypoints;
+                                        final int a4 = a3;
 
-                                    String url2 = "https://maps.googleapis.com/maps/";
+
+                                        Retrofit retrofit4 = new Retrofit.Builder()
+                                                .baseUrl(url)
+                                                .addConverterFactory(GsonConverterFactory.create())
+                                                .build();
+
+                                        RetrofitMaps service4 = retrofit4.create(RetrofitMaps.class);
+
+                                        Call<Example> call4 = service4.getNearbyPlaces2(origin_latitude + "," + origin_longitude, radius, page);
+
+                                        call4.enqueue(new Callback<Example>() {
+                                            @Override
+                                            public void onResponse(Call<Example> call4, Response<Example> response4) {
+                                                try {
+                                                    int a5 = a4;
+                                                    String waypoints4 = "";
+                                                    for (int i = 0; i < response4.body().getResults().size(); i++) {
+
+                                                        for (String tp : TYP) {
+                                                            if ((response4.body().getResults().get(i).getTypes().contains(tp)) && (a5 < 10)) {
+                                                                waypoints4 += "place_id:" + response4.body().getResults().get(i).getPlaceId() + '|';
+                                                                a5++;
+                                                                String inf = "";
+                                                                Double lat = response4.body().getResults().get(i).getGeometry().getLocation().getLat();
+                                                                Double lng = response4.body().getResults().get(i).getGeometry().getLocation().getLng();
+                                                                String placeName = response4.body().getResults().get(i).getName();
+
+
+                                                                try {
+                                                                    if (response4.body().getResults().get(i).getOpeningHours().getOpenNow().equals(true)) {
+                                                                        inf = "Открыто сейчас";
+                                                                    } else {
+                                                                        inf = "Закрыто сейчас";
+                                                                    }
+                                                                } catch (NullPointerException e) {
+                                                                    Log.d("OpeningHours", "There is an error");
+                                                                }
+                                                                LatLng place = new LatLng(lat, lng);
+                                                                mMap.addMarker(new MarkerOptions().position(place)
+                                                                        .title(placeName).snippet(inf));
+
+                                                            }
+
+                                                        }
+
+                                                    }
+                                                    String fin_waypoints = waypoints24 + waypoints4;
+                                                    try {
+                                                        fin_waypoints = fin_waypoints.substring(0, fin_waypoints.length() - 1);
+                                                    } catch (Exception e){
+                                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                                "Не найдено мест поблизости", Toast.LENGTH_LONG);
+                                                        toast.show();
+                                                    }
+
+                                                    String url2 = "https://maps.googleapis.com/maps/";
+
+                                                    Retrofit retrofit2 = new Retrofit.Builder()
+                                                            .baseUrl(url2)
+                                                            .addConverterFactory(GsonConverterFactory.create())
+                                                            .build();
+
+                                                    RetrofitMaps service2 = retrofit2.create(RetrofitMaps.class);
+
+                                                    Call<Example2> call2 = service2.getDistanceDuration(origin_latitude + "," + origin_longitude, origin_latitude + "," + origin_longitude, "optimize:true|" + fin_waypoints);
+                                                    // Call<Example2> call2 = service2.getDistanceDuration( origin_latitude + "," + origin_longitude, or);
+
+                                                    call2.enqueue(new Callback<Example2>() {
+                                                        @Override
+                                                        public void onResponse(Call<Example2> call2, Response<Example2> response2) {
+                                                            try {
+                                                                //Remove previous line from map
+                                                                if (line[0] != null) {
+                                                                    line[0].remove();
+                                                                }
+                                                                // This loop will go through all the results and add marker on each location.
+                                                                for (int i = 0; i < response2.body().getRoutes().size(); i++) {
+                                                                    // String distance = response2.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
+                                                                    // String time = response2.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
+                                                                    String encodedString = response2.body().getRoutes().get(0).getOverviewPolyline().getPoints();
+
+                                                                    // DECODE HERE
+                                                                    List<LatLng> poly = new ArrayList<LatLng>();
+                                                                    int index = 0, len = encodedString.length();
+                                                                    int lat = 0, lng = 0;
+
+                                                                    while (index < len) {
+                                                                        int b, shift = 0, result = 0;
+                                                                        do {
+                                                                            b = encodedString.charAt(index++) - 63;
+                                                                            result |= (b & 0x1f) << shift;
+                                                                            shift += 5;
+                                                                        } while (b >= 0x20);
+                                                                        int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+                                                                        lat += dlat;
+
+                                                                        shift = 0;
+                                                                        result = 0;
+                                                                        do {
+                                                                            b = encodedString.charAt(index++) - 63;
+                                                                            result |= (b & 0x1f) << shift;
+                                                                            shift += 5;
+                                                                        } while (b >= 0x20);
+                                                                        int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+                                                                        lng += dlng;
+
+                                                                        LatLng p = new LatLng((((double) lat / 1E5)),
+                                                                                (((double) lng / 1E5)));
+                                                                        poly.add(p);
+                                                                    }
+
+                                                                    line[0] = mMap.addPolyline(new PolylineOptions()
+                                                                            .addAll(poly)
+                                                                            .width(20)
+                                                                            .color(Color.parseColor("#076AFC"))
+                                                                            .geodesic(true)
+                                                                    );
+
+                                                                }
+
+                                                            } catch (Exception e){
+                                                                Log.d("error", "Something went wrong");
+
+                                                            }
+
+                                                }
+
+                                                        @Override
+                                                        public void onFailure(Call<Example2> call, Throwable t) {
+                                                            Log.d("onFailure", t.toString());
+                                                        }
+                                                    });
+
+
+
+                                            // MAKE ROUTE HERE
+                                            // optimize:true перед waypoints
+
+                                    /*String url2 = "https://maps.googleapis.com/maps/";
 
                                     Retrofit retrofit2 = new Retrofit.Builder()
                                             .baseUrl(url2)
@@ -373,6 +516,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             @Override
                             public void onFailure(Call<Example> call, Throwable t) {
                                 Log.d("onFailure", t.toString());
+                            } */
+                                    } catch (Exception e) {
+                                        Log.d("error", "Something went wrong");
+                                    }
+
+
+                            }
+
+
+                            @Override
+                            public void onFailure(Call<Example> call, Throwable t) {
+                                Log.d("onFailure", t.toString());
                             }
                         });
                     } catch (Exception e) {
@@ -381,9 +536,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch (Exception e) {
                     Log.d("error", "Something went wrong");
                 }
-
             }
 
+            @Override
+            public void onFailure(Call<Example> call, Throwable t) {
+                Log.d("onFailure", t.toString());
+            }
+        });
+    } catch (Exception e) {
+               Log.d("error", "Something went wrong");
+                    }
+                } catch (Exception e) {
+                    Log.d("error", "Something went wrong");
+                }
+            }
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
@@ -391,6 +557,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
 
 
 
