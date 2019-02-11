@@ -230,7 +230,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         }
                     }
-                    TimeUnit.SECONDS.sleep(10);
+                    TimeUnit.SECONDS.sleep(4);
                     try {
                         String page = response.body().getNextPageToken();
                         String url = "https://maps.googleapis.com/maps/";
