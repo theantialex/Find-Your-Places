@@ -43,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double origin_latitude;
     double origin_longitude;
     private int num_of_places;
+    private boolean a = false;
 
 
     private GoogleMap mMap;
@@ -56,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    private final LatLng mDefaultLocation = new LatLng(55.766051, 37.684460);
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -168,11 +169,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getDeviceLocation();
 
         Button btn = (Button) findViewById(R.id.btnRestaurant);
+        Button btn2 = findViewById(R.id.btnRestaurant2);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (a){
+                    mMap.clear();
+                }
                 main(TYPES, radius);
+                a = true;
 
+            }
+
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (a){
+                    mMap.clear();
+                }
+                main(TYPES, 1000);
+                a = true;
             }
         });
 
