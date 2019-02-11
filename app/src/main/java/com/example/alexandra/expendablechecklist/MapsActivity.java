@@ -180,6 +180,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void main(final List<String> TYP, final int radius) {
         num_of_places = 0;
         final Polyline[] line = new Polyline[1];
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "Загрузка...", Toast.LENGTH_LONG);
+        toast.show();
 
         String url = "https://maps.googleapis.com/maps/";
 
@@ -231,6 +234,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         }
                     }
+
                     TimeUnit.SECONDS.sleep(4);
                     try {
                         String page = response.body().getNextPageToken();
