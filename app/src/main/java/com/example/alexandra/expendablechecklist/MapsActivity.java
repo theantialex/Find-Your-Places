@@ -249,7 +249,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("OpeningHours", "There is an error");
                                 }
                                 if (rating != null){
-                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                    inf += "Рейтинг: " + String.valueOf(rating);
                                 }
                                 if (price != null){
                                     inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
@@ -311,7 +311,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                     Log.d("OpeningHours", "There is an error");
                                                 }
                                                 if (rating != null){
-                                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                                    inf += "Рейтинг: " + String.valueOf(rating);
                                                 }
                                                 if (price != null){
                                                     inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
@@ -374,7 +374,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                                     Log.d("OpeningHours", "There is an error");
                                                                 }
                                                                 if (rating != null){
-                                                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                                                    inf += "Рейтинг: " + String.valueOf(rating);
                                                                 }
                                                                 if (price != null){
                                                                     inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
