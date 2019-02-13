@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        radius = Integer.valueOf(getIntent().getStringExtra("radius")) + 2000;
+        radius = Integer.valueOf(getIntent().getStringExtra("radius"));
         //TYPES.add("grocery_or_supermarket");
 
 
@@ -178,7 +178,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (a){
                     mMap.clear();
                 }
-                main(TYPES, radius);
+                main(TYPES, radius + 1000);
                 a = true;
 
             }
@@ -190,7 +190,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (a){
                     mMap.clear();
                 }
-                main(TYPES, 1000);
+                if (radius >= 3000){
+                    main(TYPES, 3000);
+                } else{
+                    main(TYPES, 1000);
+                }
+
                 a = true;
             }
         });
