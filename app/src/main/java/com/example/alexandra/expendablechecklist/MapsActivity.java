@@ -45,6 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double origin_longitude;
     private int num_of_places;
     private boolean a = false;
+    private LatLng latLng;
 
 
     private GoogleMap mMap;
@@ -170,13 +171,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getDeviceLocation();
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
-        Button btn = (Button) findViewById(R.id.btnRestaurant);
-        Button btn2 = findViewById(R.id.btnRestaurant2);
+        Button btn = (Button) findViewById(R.id.btnMainRoute);
+        Button btn2 = findViewById(R.id.btnAdditionalRoute);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (a){
                     mMap.clear();
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                            latLng, DEFAULT_ZOOM));
                 }
                 main(TYPES, radius + 1000);
                 a = true;
@@ -189,13 +192,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if (a){
                     mMap.clear();
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                            latLng, DEFAULT_ZOOM));
                 }
                 if (radius >= 3000){
                     main(TYPES, 3000);
                 } else{
                     main(TYPES, 1000);
                 }
-
                 a = true;
             }
         });
@@ -268,7 +272,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
 
-                    TimeUnit.SECONDS.sleep(4);
+                    TimeUnit.SECONDS.sleep(3);
                     try {
                         String page = response.body().getNextPageToken();
                         String url = "https://maps.googleapis.com/maps/";
@@ -333,7 +337,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                    // waypoints = waypoints.substring(0, waypoints.length() - 1);
 
-                                    TimeUnit.SECONDS.sleep(4);
+                                    TimeUnit.SECONDS.sleep(3);
                                     try {
                                         String page = response3.body().getNextPageToken();
                                         String url = "https://maps.googleapis.com/maps/";
@@ -482,100 +486,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-                                            // MAKE ROUTE HERE
-                                            // optimize:true перед waypoints
-
-                                    /*String url2 = "https://maps.googleapis.com/maps/";
-
-                                    Retrofit retrofit2 = new Retrofit.Builder()
-                                            .baseUrl(url2)
-                                            .addConverterFactory(GsonConverterFactory.create())
-                                            .build();
-
-                                    RetrofitMaps service2 = retrofit2.create(RetrofitMaps.class);
-
-                                    Call<Example2> call2 = service2.getDistanceDuration(origin_latitude + "," + origin_longitude, origin_latitude + "," + origin_longitude, "optimize:true|" + waypoints);
-                                    // Call<Example2> call2 = service2.getDistanceDuration( origin_latitude + "," + origin_longitude, or);
-
-                                    call2.enqueue(new Callback<Example2>() {
-                                        @Override
-                                        public void onResponse(Call<Example2> call2, Response<Example2> response2) {
-                                            try {
-                                                //Remove previous line from map
-                                                if (line[0] != null) {
-                                                    line[0].remove();
-                                                }
-                                                // This loop will go through all the results and add marker on each location.
-                                                for (int i = 0; i < response2.body().getRoutes().size(); i++) {
-                                                    // String distance = response2.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
-                                                    // String time = response2.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
-                                                    String encodedString = response2.body().getRoutes().get(0).getOverviewPolyline().getPoints();
-
-                                                    // DECODE HERE
-                                                    List<LatLng> poly = new ArrayList<LatLng>();
-                                                    int index = 0, len = encodedString.length();
-                                                    int lat = 0, lng = 0;
-
-                                                    while (index < len) {
-                                                        int b, shift = 0, result = 0;
-                                                        do {
-                                                            b = encodedString.charAt(index++) - 63;
-                                                            result |= (b & 0x1f) << shift;
-                                                            shift += 5;
-                                                        } while (b >= 0x20);
-                                                        int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-                                                        lat += dlat;
-
-                                                        shift = 0;
-                                                        result = 0;
-                                                        do {
-                                                            b = encodedString.charAt(index++) - 63;
-                                                            result |= (b & 0x1f) << shift;
-                                                            shift += 5;
-                                                        } while (b >= 0x20);
-                                                        int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-                                                        lng += dlng;
-
-                                                        LatLng p = new LatLng((((double) lat / 1E5)),
-                                                                (((double) lng / 1E5)));
-                                                        poly.add(p);
-                                                    }
-
-                                                    line[0] = mMap.addPolyline(new PolylineOptions()
-                                                            .addAll(poly)
-                                                            .width(20)
-                                                            .color(Color.parseColor("#076AFC"))
-                                                            .geodesic(true)
-                                                    );
-
-                                                }
-
-                                            } catch (Exception e) {
-                                                Log.d("error", "Something went wrong");
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Example2> call, Throwable t) {
-                                            Log.d("onFailure", t.toString());
-                                        }
-
-                                    });
-                                } catch (Exception e) {
-                                    Log.d("error", "Something went wrong");
-                                }
-                            }
-                            @Override
-                            public void onFailure(Call<Example> call, Throwable t) {
-                                Log.d("onFailure", t.toString());
-                            } */
                                     } catch (Exception e) {
                                         Log.d("error", "Something went wrong");
                                     }
 
 
                             }
-
 
                             @Override
                             public void onFailure(Call<Example> call, Throwable t) {
@@ -630,10 +546,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mLastKnownLocation = task.getResult();
                             origin_latitude = mLastKnownLocation.getLatitude();
                             origin_longitude = mLastKnownLocation.getLongitude();
+                            latLng = new LatLng(mLastKnownLocation.getLatitude(),
+                                    mLastKnownLocation.getLongitude());
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                    latLng, DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());

@@ -29,7 +29,7 @@
             android:textSize="30dp" />
 
         <Button
-            android:id="@+id/btnRestaurant"
+            android:id="@+id/btnMainRoute"
             android:layout_width="160dp"
             android:layout_height="80dp"
             android:layout_gravity="top"
@@ -41,7 +41,7 @@
             app:fontFamily="serif" />
 
         <Button
-            android:id="@+id/btnRestaurant2"
+            android:id="@+id/btnAdditionalRoute"
             android:layout_width="160dp"
             android:layout_height="80dp"
             android:layout_gravity="left"

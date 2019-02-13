@@ -13,6 +13,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
 
     private final View mWindow;
     private Context mContext;
+    private String snippet2;
 
     public CustomInfoWindowAdapter(Context mContext) {
         this.mContext = mContext;
@@ -20,27 +21,35 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
     }
 
     private void renderWindowText(Marker marker, View view){
+        snippet2 = "";
+        String snippet = "";
         String title = marker.getTitle();
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         if (!title.equals("")){
             tvTitle.setText(title);
         }
-        String snippet = marker.getSnippet();
+        snippet = marker.getSnippet();
         RatingBar rating = view.findViewById(R.id.rating);
         rating.setStepSize((float) 0.1);
+        TextView tvSnippet = (TextView) view.findViewById(R.id.snippet);
         if (snippet.contains("Рейтинг")) {
+            rating.setVisibility(View.VISIBLE);
             String stars = snippet.substring(snippet.indexOf("Рейтинг: "), snippet.indexOf("Рейтинг: ") + 12);
             Float r = Float.valueOf(snippet.substring(snippet.indexOf("Рейтинг: ")+ 9 , snippet.indexOf("Рейтинг: ") + 12 ));
             rating.setRating(r);
-            snippet = snippet.replaceAll(stars, "");
+            snippet2 = snippet.substring(0,snippet.indexOf(stars)) + snippet.substring(snippet.indexOf(stars) + stars.length());
+            tvSnippet.setText(snippet2);
         }
         else{
             rating.setVisibility(View.GONE);
+            if (!snippet.equals("")){
+                tvSnippet.setText(snippet);
+            } else{
+                tvSnippet.setText("");
+            }
         }
-        TextView tvSnippet = (TextView) view.findViewById(R.id.snippet);
-        if (!snippet.equals("")){
-            tvSnippet.setText(snippet);
-        }
+
+
 
 
     }
