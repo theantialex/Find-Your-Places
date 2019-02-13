@@ -1,5 +1,6 @@
 package com.example.alexandra.expendablechecklist;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -82,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         radius = Integer.valueOf(getIntent().getStringExtra("radius"));
-        //TYPES.add("grocery_or_supermarket");
+
 
 
 
@@ -100,6 +101,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
             }
+
+        }
+        if (TYPES.size() == 0){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Укажите категории мест", Toast.LENGTH_LONG);
+            toast.show();
+            Intent intent = new Intent(".PlacesListActivity");
+            startActivity(intent);
 
         }
 

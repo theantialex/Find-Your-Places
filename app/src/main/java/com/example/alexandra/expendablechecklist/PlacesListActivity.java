@@ -36,6 +36,7 @@ public class PlacesListActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(PlacesListActivity.this, MapsActivity.class);
                 intent.putExtra("radius", radius);
                 startActivity(intent);

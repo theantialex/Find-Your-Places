@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 public class NewRouteActivity extends AppCompatActivity {
 
@@ -36,19 +37,25 @@ public class NewRouteActivity extends AppCompatActivity {
 
         act_choose = (Button) findViewById(R.id.btnChoose);
 
+
         act_choose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int a = thouPicker.getValue();
-                        a *= 3600;
-                        int b =  tminPicker.getValue();
-                        int c = ((a+b)/951)*500;
-                        radius = String.valueOf(c);
-                        Intent intent = new Intent(".PlacesListActivity");
-                        intent.putExtra("rad", radius);
-                        startActivity(intent);
-
+                        if ((thouPicker.getValue() == 0) && (tminPicker.getValue() == 0) ){
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "Введите время", Toast.LENGTH_LONG);
+                            toast.show();
+                        } else {
+                            int a = thouPicker.getValue();
+                            a *= 3600;
+                            int b =  tminPicker.getValue();
+                            int c = ((a+b)/951)*500;
+                            radius = String.valueOf(c);
+                            Intent intent = new Intent(".PlacesListActivity");
+                            intent.putExtra("rad", radius);
+                            startActivity(intent);
+                        }
 
                     }
                 }
