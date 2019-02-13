@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -167,6 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
         Button btn = (Button) findViewById(R.id.btnRestaurant);
         Button btn2 = findViewById(R.id.btnRestaurant2);
@@ -234,18 +236,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 Double lat = response.body().getResults().get(i).getGeometry().getLocation().getLat();
                                 Double lng = response.body().getResults().get(i).getGeometry().getLocation().getLng();
                                 String placeName = response.body().getResults().get(i).getName();
+                                Double rating = response.body().getResults().get(i).getRating();
+                                Integer price = response.body().getResults().get(i).getPriceLevel();
 
                                 try {
                                     if (response.body().getResults().get(i).getOpeningHours().getOpenNow().equals(true)) {
-                                        inf = "Открыто сейчас";
+                                        inf = "Открыто сейчас" + "\n";
                                     } else {
-                                        inf = "Закрыто сейчас";
+                                        inf = "Закрыто сейчас" + "\n";
                                     }
                                 } catch (NullPointerException e) {
                                     Log.d("OpeningHours", "There is an error");
                                 }
+                                if (rating != null){
+                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                }
+                                if (price != null){
+                                    inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
+                                }
                                 LatLng place = new LatLng(lat, lng);
-                                mMap.addMarker(new MarkerOptions().position(place)
+
+                                Marker mMarker = mMap.addMarker(new MarkerOptions().position(place)
                                         .title(placeName).snippet(inf));
                             }
 
@@ -286,16 +297,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                 Double lat = response3.body().getResults().get(i).getGeometry().getLocation().getLat();
                                                 Double lng = response3.body().getResults().get(i).getGeometry().getLocation().getLng();
                                                 String placeName = response3.body().getResults().get(i).getName();
+                                                Double rating = response3.body().getResults().get(i).getRating();
+                                                Integer price = response3.body().getResults().get(i).getPriceLevel();
 
 
                                                 try {
                                                     if (response3.body().getResults().get(i).getOpeningHours().getOpenNow().equals(true)) {
-                                                        inf = "Открыто сейчас";
+                                                        inf = "Открыто сейчас" + "\n";
                                                     } else {
-                                                        inf = "Закрыто сейчас";
+                                                        inf = "Закрыто сейчас" + "\n";
                                                     }
                                                 } catch (NullPointerException e) {
                                                     Log.d("OpeningHours", "There is an error");
+                                                }
+                                                if (rating != null){
+                                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                                }
+                                                if (price != null){
+                                                    inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
                                                 }
                                                 LatLng place = new LatLng(lat, lng);
                                                 mMap.addMarker(new MarkerOptions().position(place)
@@ -342,16 +361,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                                 Double lat = response4.body().getResults().get(i).getGeometry().getLocation().getLat();
                                                                 Double lng = response4.body().getResults().get(i).getGeometry().getLocation().getLng();
                                                                 String placeName = response4.body().getResults().get(i).getName();
-
+                                                                Double rating = response4.body().getResults().get(i).getRating();
+                                                                Integer price = response4.body().getResults().get(i).getPriceLevel();
 
                                                                 try {
                                                                     if (response4.body().getResults().get(i).getOpeningHours().getOpenNow().equals(true)) {
-                                                                        inf = "Открыто сейчас";
+                                                                        inf = "Открыто сейчас" + "\n";
                                                                     } else {
-                                                                        inf = "Закрыто сейчас";
+                                                                        inf = "Закрыто сейчас" + "\n";
                                                                     }
                                                                 } catch (NullPointerException e) {
                                                                     Log.d("OpeningHours", "There is an error");
+                                                                }
+                                                                if (rating != null){
+                                                                    inf += "Рейтинг: " + String.valueOf(rating) + "/5\n";
+                                                                }
+                                                                if (price != null){
+                                                                    inf += "Ценовая категория: "+ String.valueOf(price) + "/5\n";
                                                                 }
                                                                 LatLng place = new LatLng(lat, lng);
                                                                 mMap.addMarker(new MarkerOptions().position(place)
