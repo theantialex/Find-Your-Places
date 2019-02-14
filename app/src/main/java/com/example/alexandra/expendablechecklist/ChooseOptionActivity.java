@@ -21,6 +21,7 @@ public class ChooseOptionActivity extends AppCompatActivity {
 
     public void addListenerOnButton() {
 
+
         act_new = (Button) findViewById(R.id.btnNewRoute);
         act_old = findViewById(R.id.btnFavRoute);
 
